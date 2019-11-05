@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/fuzzy.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div class="row">
+        <div class="offset-md-3 col-md-6 text-center mt-4">
+            <h3>BOTECO DO GALLAS</h3>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="alert alert-danger" role="alert" id="feedback" style="display:none">
+                Os valores devem ser entre 0 e 100ml!
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-3 col-md-6 text-center">
+            <select class="custom-select" id="refri">
+                <option value="coke">Coca Cola</option>
+                <option value="pepsi">Pepsi</option>
+            </select>
+            <input type="number" class="form-control mt-1" onblur="checkML($(this))" id="qtd_refri"
+                placeholder="Quantidade Refrigerante (ml)">
+            <input type="number" class="form-control mt-1" onblur="checkML($(this))" id="qtd_run"
+                placeholder="Quantidade Run (ml)">
+            <input type="number" class="form-control mt-1" onblur="checkML($(this))" id="qtd_gelo"
+                placeholder="Quantidade Gelo (ml)">
+            <a class="btn btn-primary mt-1" href="#" id="make_drink" onclick="calculateSoda()">Fazer Drink</a>
+
+            <div class="card text-center mt-5">
+                <div class="card-header">
+                    Cuba Livre
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Quantidades</h5>
+                    <p class="card-text">Run: 10ml a 30ml</p>
+                    <p class="card-text">Gelo: 20ml</p>
+                    <p class="card-text">Coca-Cola (50ml a 60ml) ou Pepsi-Cola (60ml a 70ml)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
