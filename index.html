@@ -5,16 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>BOTECO DO GALLAS</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/index.css">
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/fuzzy.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.css">
+
 </head>
 
 <body>
     <div class="row">
-        <div class="offset-md-3 col-md-6 text-center mt-4">
-            <h3>BOTECO DO GALLAS</h3>
+        <div class="col-md-12">
+            <div class="row justify-content-center mt-2 mb-2">
+                <h3 class="text-align-center"><span >BOTECO</span> <span class="f-small">DO</span> <br><span class="f-big font-weight-bold">GALLAS</span></h3>
+            </div>
         </div>
         <div class="col-md-3 text-center">
             <div class="alert alert-danger" role="alert" id="feedback" style="display:none">
@@ -22,31 +27,54 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="offset-md-3 col-md-6 text-center">
-            <select class="custom-select" id="refri">
-                <option value="coke">Coca Cola</option>
-                <option value="pepsi">Pepsi</option>
-            </select>
-            <input type="number" class="form-control mt-1" onblur="checkML($(this))" id="qtd_refri"
-                placeholder="Quantidade Refrigerante (ml)">
-            <input type="number" class="form-control mt-1" onblur="checkML($(this))" id="qtd_run"
-                placeholder="Quantidade Run (ml)">
-            <input type="number" class="form-control mt-1" onblur="checkML($(this))" id="qtd_gelo"
-                placeholder="Quantidade Gelo (ml)">
-            <a class="btn btn-primary mt-1" href="#" id="make_drink" onclick="calculateSoda()">Fazer Drink</a>
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="row">
+                        <select class="custom-select" id="refri">
+                            <option value="coke">Coca Cola</option>
+                            <option value="pepsi">Pepsi</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <input type="number" class="form-control mt-2" onblur="checkML($(this))" id="qtd_refri"
+                            placeholder="Quantidade Refrigerante (ml)">
+                    </div>
+                    <div class="row">
+                        <input type="number" class="form-control mt-2" onblur="checkML($(this))" id="qtd_run"
+                            placeholder="Quantidade Run (ml)">
+                    </div>
+                    <div class="row">
+                        <input type="number" class="form-control mt-2" onblur="checkML($(this))" id="qtd_gelo"
+                            placeholder="Quantidade Gelo (ml)">
+                    </div>
+                    <div class="row justify-content-center">
+                        <a class="btn btn-primary btn-drink mt-4" href="#" id="make_drink" onclick="calculateSoda()">Fazer
+                            Drink</a>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="card border-0 text-center mt-5 shadow">
+                            <div class="card-header border-0">
+                                <h4 class="white-font">Cuba Livre</h4>
+                            </div>
+                            <div class="card-body card-cuba">
+                                <h5 class="card-title font-weight-bold">Quantidades</h5>
+                                <p class="card-text">Run: 10ml a 30ml</p>
+                                <p class="card-text">Gelo: 20ml</p>
+                                <p class="card-text">Coca-Cola (50ml a 60ml) ou Pepsi-Cola (60ml a 70ml)</p>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="card text-center mt-5">
-                <div class="card-header">
-                    Cuba Livre
+
+
+
+
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Quantidades</h5>
-                    <p class="card-text">Run: 10ml a 30ml</p>
-                    <p class="card-text">Gelo: 20ml</p>
-                    <p class="card-text">Coca-Cola (50ml a 60ml) ou Pepsi-Cola (60ml a 70ml)</p>
-                </div>
+
             </div>
+
         </div>
     </div>
 
