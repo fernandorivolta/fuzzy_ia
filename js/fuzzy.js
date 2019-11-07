@@ -1,3 +1,90 @@
+class Soda {
+    constructor(type) {
+        this._type = type;
+        this._strong = 0;
+        this._soft = 0;
+        this._weak = 0;
+    }
+
+    set type(type) {
+        this._type = type;
+    }
+
+    get type() {
+        return this._type;
+    }
+
+    set strong(degree) {
+        this._strong = degree;
+    }
+
+    get strong() {
+        return this._strong;
+    }
+
+    set soft(degree) {
+        this._soft = degree;
+    }
+
+    get soft() {
+        return this._soft;
+    }
+
+    set weak(degree) {
+        this._weak = degree;
+    }
+
+    get weak() {
+        return this._weak;
+    }
+}
+
+class Run {
+    constructor() {
+        this._strong = 0;
+        this._soft = 0;
+        this._weak = 0;
+    }
+
+    set strong(degree) {
+        this._strong = degree;
+    }
+
+    get strong() {
+        return this._strong;
+    }
+
+    set soft(degree) {
+        this._soft = degree;
+    }
+
+    get soft() {
+        return this._soft;
+    }
+
+    set weak(degree) {
+        this._weak = degree;
+    }
+
+    get weak() {
+        return this._weak;
+    }
+}
+
+class Ice {
+    constructor() {
+        this._degree = 0;
+    }
+
+    set degree(degree) {
+        this._degree = degree;
+    }
+
+    get degree() {
+        return this._degree;
+    }
+}
+
 var check;
 
 function checkML(input) {
@@ -20,359 +107,206 @@ function calculateSoda() {
         let soda_type = $('#refri').val();
         let run_ml = $('#qtd_run').val();
         let ice_ml = $('#qtd_gelo').val();
-        let soda_object = returnSodaDegree(soda_ml, soda_type);
-        let run_object = returnRunDegree(run_ml);
-        let ice_object = returnIceDegree(ice_ml);
-        console.log(run_object);
-        console.log(ice_object);
-        console.log(soda_object);
-        console.log('---------------------------');
-        let strong_value = calculateStrong(soda_object, run_object, ice_object);
-        let weak_value = calculateWeak(soda_object, run_object, ice_object);
-        let soft_value = calculateSoft(soda_object, run_object, ice_object);
+        var soda = new Soda(soda_type);
+        var run = new Run();
+        var ice = new Ice();
+        SodaStrong(soda, soda_ml);
+        SodaSoft(soda, soda_ml);
+        SodaWeak(soda, soda_ml);
+        RunStrong(run, run_ml);
+        RunSoft(run, run_ml);
+        RunWeak(run, run_ml);
+        IceDegree(ice, ice_ml);
+        console.log(run);
+        console.log(soda);
+        console.log(ice);
+        let strong_max_val = CalculateStrong(run, ice, soda);
+        let soft_max_val = CalculateSoft(run, ice, soda);
+        let weak_max_val = CalculateWeak(run, ice, soda);
+        taste = CalculateTaste(strong_max_val, soft_max_val, weak_max_val);
+        console.log(taste);
+        price = CalculatePrice(taste);
+        alert("O Preço da bebida é " + price);
+        console.log("O Preço da bebida é " + price);
     }
 }
 
-function calculateWeak(soda_object, run_object, ice_object) {
-    let min_value = 9999;
-    let max_value = -1;
-    let first_arr_val = [soda_object.relevance_degree_weak, run_object.relevance_degree_weak, ice_object.relevance_degree_ice];
-    first_arr_val.forEach(element => {
-        if (element < min_value) {
-            min_value = element;
-        }
-    });
-    first_min_value = min_value;
-    let second_arr_val = [soda_object.relevance_degree_weak, run_object.relevance_degree_soft, ice_object.relevance_degree_ice];
-    min_value = 9999;
-    second_arr_val.forEach(element => {
-        if (element < min_value) {
-            min_value = element;
-        }
-    });
-    second_min_value = min_value;
-    let third_arr_val = [soda_object.relevance_degree_soft, run_object.relevance_degree_weak, ice_object.relevance_degree_ice];
-    min_value = 9999;
-    third_arr_val.forEach(element => {
-        if (element < min_value) {
-            min_value = element;
-        }
-    });
-    third_min_value = min_value;
-    arr_max = [first_min_value, second_min_value, third_min_value];
-    arr_max.forEach(element => {
-        if (element > max_value) {
-            max_value = element;
-        }
-    });
-    return max_value;
-}
-
-function calculateSoft(soda_object, run_object, ice_object) {
-    let min_value = 9999;
-    let max_value = -1;
-    let first_arr_val = [soda_object.relevance_degree_strong, run_object.relevance_degree_weak, ice_object.relevance_degree_ice];
-    first_arr_val.forEach(element => {
-        if (element < min_value) {
-            min_value = element;
-        }
-    });
-    first_min_value = min_value;
-    let second_arr_val = [soda_object.relevance_degree_soft, run_object.relevance_degree_soft, ice_object.relevance_degree_ice];
-    min_value = 9999;
-    second_arr_val.forEach(element => {
-        if (element < min_value) {
-            min_value = element;
-        }
-    });
-    second_min_value = min_value;
-    let third_arr_val = [soda_object.relevance_degree_weak, run_object.relevance_degree_strong, ice_object.relevance_degree_ice];
-    min_value = 9999;
-    third_arr_val.forEach(element => {
-        if (element < min_value) {
-            min_value = element;
-        }
-    });
-    third_min_value = min_value;
-    arr_max = [first_min_value, second_min_value, third_min_value];
-    arr_max.forEach(element => {
-        if (element > max_value) {
-            max_value = element;
-        }
-    });
-    return max_value;
-}
-
-function calculateStrong(soda_object, run_object, ice_object) {
-    let min_value = 9999;
-    let max_value = -1;
-    let first_arr_val = [soda_object.relevance_degree_strong, run_object.relevance_degree_soft, ice_object.relevance_degree_ice];
-    first_arr_val.forEach(element => {
-        if (element < min_value) {
-            min_value = element;
-        }
-    });
-    first_min_value = min_value;
-    let second_arr_val = [soda_object.relevance_degree_strong, run_object.relevance_degree_strong, ice_object.relevance_degree_ice];
-    min_value = 9999;
-    second_arr_val.forEach(element => {
-        if (element < min_value) {
-            min_value = element;
-        }
-    });
-    second_min_value = min_value;
-    let third_arr_val = [soda_object.relevance_degree_soft, run_object.relevance_degree_strong, ice_object.relevance_degree_ice];
-    min_value = 9999;
-    third_arr_val.forEach(element => {
-        if (element < min_value) {
-            min_value = element;
-        }
-    });
-    third_min_value = min_value;
-    arr_max = [first_min_value, second_min_value, third_min_value];
-    arr_max.forEach(element => {
-        if (element > max_value) {
-            max_value = element;
-        }
-    });
-    return max_value;
-}
-
-function returnIceDegree(ice_ml) {
-    if (ice_ml == 20) {
-        return {
-            type: 'ice',
-            relevance_degree_ice: 1
-        }
+function CalculatePrice(taste) {
+    if (taste == "Weak") {
+        return 15;
+    } else if (taste == "Soft") {
+        return 20;
+    } else if (taste == "Strong") {
+        return 25;
     } else {
-        return {
-            type: 'ice',
-            relevance_degree_ice: 0
-        }
+        return 30;
     }
 }
 
-function returnRunDegree(run_ml) {
-    let rel_deg;
-    if (run_ml < 10) {
-        return {
-            type: 'run',
-            relevance_degree_weak: 0,
-            relevance_degree_strong: 0,
-            relevance_degree_soft: 0
+function CalculateTaste(strong_max_val, soft_max_val, weak_max_val) {
+    if (strong_max_val + soft_max_val + weak_max_val > 0) {
+        let keys = ["Strong", "Soft", "Weak"];
+        let max_value = max([strong_max_val, soft_max_val, weak_max_val]);
+        return keys[[strong_max_val, soft_max_val, weak_max_val].indexOf(max_value)];
+    } else {
+        return "not cuba"
+    }
+}
+
+function CalculateStrong(run, ice, soda) {
+    let strong_max_val = max([min([ice.degree, soda.strong, run.soft]), min([ice.degree, soda.strong, run.strong]), min([ice.degree, soda.soft, run.strong])]);
+    console.log("Strong max value: " + strong_max_val)
+    return strong_max_val
+}
+
+function CalculateSoft(run, ice, soda) {
+    let soft_max_val = max([min([ice.degree, soda.strong, run.weak]), min([ice.degree, soda.soft, run.soft]), min([ice.degree, soda.weak, run.strong])]);
+    console.log("Soft max value: " + soft_max_val)
+    return soft_max_val
+}
+
+function CalculateWeak(run, ice, soda) {
+    let weak_max_val = max([min([ice.degree, soda.weak, run.weak]), min([ice.degree, soda.weak, run.soft]), min([ice.degree, soda.soft, run.weak])]);
+    console.log("Weak max value: " + weak_max_val)
+    return weak_max_val
+}
+
+function min(arr) {
+    let min_value = 9999;
+    arr.forEach(element => {
+        if (element < min_value) {
+            min_value = element;
         }
-    } else if (run_ml >= 10 && run_ml < 15) {
-        return {
-            type: 'run',
-            relevance_degree_weak: 1,
-            relevance_degree_strong: 0,
-            relevance_degree_soft: 0
+    });
+    return min_value;
+}
+
+function max(arr) {
+    let max_value = -1;
+    arr.forEach(element => {
+        if (element > max_value) {
+            max_value = element;
         }
-    } else if (run_ml >= 15 && run_ml < 20) {
-        rel_deg = (20 - run_ml) / (20 - 15);
-        if (rel_deg > 0.5) {
-            rel_deg_soft = rel_deg;
-            rel_deg_weak = 1 - rel_deg;
-        } else if (rel_deg == 0.5) {
-            rel_deg_soft = 0.5;
-            rel_deg_weak = 0.5;
-        } else {
-            rel_deg_weak = rel_deg;
-            rel_deg_soft = 1 - rel_deg;
-        }
-        return {
-            type: 'run',
-            relevance_degree_weak: rel_deg_weak,
-            relevance_degree_strong: 0,
-            relevance_degree_soft: rel_deg_soft
-        }
-    } else if (run_ml >= 20 && run_ml < 23) {
-        return {
-            type: 'run',
-            relevance_degree_weak: 0,
-            relevance_degree_strong: 0,
-            relevance_degree_soft: 1
-        }
-    } else if (run_ml >= 23 && run_ml < 27.1) {
-        if (run_ml >= 23 && run_ml < 25) {
-            rel_deg_soft = 1;
-            rel_deg_strong = (28 - run_ml) / (28 - 23);
-        } else if (run_ml >= 25 && run_ml < 27) {
-            rel_deg_soft = (27 - run_ml) / (27 - 25);
-            rel_deg_strong = (28 - run_ml) / (28 - 23);
-        }
-        return {
-            type: 'run',
-            relevance_degree_weak: 0,
-            relevance_degree_strong: 1 - rel_deg_strong,
-            relevance_degree_soft: rel_deg_soft
-        }
-    } else if (run_ml >= 27.1 && run_ml < 28) {
-        rel_deg_strong = (28 - run_ml) / (28 - 23);
-        return {
-            type: 'run',
-            relevance_degree_weak: 0,
-            relevance_degree_strong: rel_deg_strong,
-            relevance_degree_soft: 0
-        }
+    });
+    return max_value;
+}
+
+function IceDegree(ice, ice_ml) {
+    if (ice_ml == 20) {
+        ice.degree = 1;
+    }
+}
+
+function RunStrong(run, run_ml) {
+    if (run_ml < 23) {
+        run.strong = 0;
+    } else if (run_ml >= 23 && run_ml < 28) {
+        run.strong = 1 - (28 - run_ml) / (28 - 23);
     } else if (run_ml >= 28 && run_ml <= 30) {
-        return {
-            type: 'run',
-            relevance_degree_weak: 0,
-            relevance_degree_strong: 1,
-            relevance_degree_soft: 0
-        }
+        run.strong = 1;
+    } else {
+        run.strong = 0;
     }
 }
 
+function RunSoft(run, run_ml) {
+    if (run_ml < 15) {
+        run.soft = 0;
+    } else if (run_ml >= 15 && run_ml < 20) {
+        run.soft = 1 - (20 - run_ml) / (20 - 15);
+    } else if (run_ml >= 20 && run_ml <= 25) {
+        run.soft = 1;
+    } else if (run_ml > 25 && run_ml <= 27) {
+        run.soft = (27 - run_ml) / (27 - 25);
+    } else {
+        run.soft = 0;
+    }
+}
 
-function returnSodaDegree(soda_ml, soda_type) {
-    let rel_deg;
-    if (soda_type == "coke") {
+function RunWeak(run, run_ml) {
+    if (run_ml < 10) {
+        run.weak = 0;
+    } else if (run_ml >= 10 && run_ml < 15) {
+        run.weak = 1;
+    } else if (run_ml >= 15 && run_ml <= 20) {
+        run.weak = (20 - run_ml) / (20 - 15);
+    } else {
+        run.weak = 0;
+    }
+}
+
+function SodaStrong(soda, soda_ml) {
+    if (soda._type == "coke") {
         if (soda_ml < 50) {
-            return {
-                type: 'coke',
-                relevance_degree_soft: 0,
-                relevance_degree_strong: 0,
-                relevance_degree_weak: 0
-            }
+            soda.strong = 0;
         } else if (soda_ml >= 50 && soda_ml < 52) {
-            return {
-                type: 'coke',
-                relevance_degree_strong: 1,
-                relevance_degree_soft: 0,
-                relevance_degree_weak: 0
-            }
-        } else if (soda_ml >= 52 && soda_ml < 54) {
-            rel_deg = (54 - soda_ml) / (54 - 52);
-            if (rel_deg > 0.5) {
-                rel_deg_soft = rel_deg;
-                rel_deg_strong = 1 - rel_deg;
-            } else if (rel_deg == 0.5) {
-                rel_deg_soft = 0.5;
-                rel_deg_strong = 0.5;
-            } else {
-                rel_deg_strong = rel_deg;
-                rel_deg_soft = 1 - rel_deg;
-            }
-            return {
-                type: 'coke',
-                relevance_degree_strong: rel_deg_strong,
-                relevance_degree_soft: rel_deg_soft,
-                relevance_degree_weak: 0
-            }
-        } else if (soda_ml >= 54 && soda_ml < 56) {
-            return {
-                type: 'coke',
-                relevance_degree_soft: 1,
-                relevance_degree_weak: 0,
-                relevance_degree_strong: 0
-            }
-        } else if (soda_ml >= 56 && soda_ml < 58) {
-            rel_deg = (58 - soda_ml) / (58 - 56);
-            if (rel_deg > 0.5) {
-                rel_deg_weak = rel_deg;
-                rel_deg_soft = 1 - rel_deg;
-            } else if (rel_deg == 0.5) {
-                rel_deg_weak = 0.5;
-                rel_deg_soft = 0.5;
-            } else {
-                rel_deg_soft = rel_deg;
-                rel_deg_weak = 1 - rel_deg;
-            }
-            return {
-                type: 'coke',
-                relevance_degree_soft: rel_deg_soft,
-                relevance_degree_weak: rel_deg_weak,
-                relevance_degree_strong: 0
-            }
-        } else if (soda_ml >= 58 && soda_ml <= 60) {
-            return {
-                type: 'coke',
-                relevance_degree_weak: 1,
-                relevance_degree_strong: 0,
-                relevance_degree_soft: 0
-            }
-        } else if (soda_ml > 60) {
-            return {
-                type: 'coke',
-                relevance_degree_weak: 0,
-                relevance_degree_strong: 0,
-                relevance_degree_soft: 0
-            }
+            soda.strong = 1;
+        } else if (soda_ml >= 52 && soda_ml <= 54) {
+            soda.strong = (54 - soda_ml) / (54 - 52);
+        } else {
+            soda.strong = 0;
         }
     } else {
         if (soda_ml < 60) {
-            return {
-                type: 'pepsi',
-                relevance_degree_soft: 0,
-                relevance_degree_strong: 0,
-                relevance_degree_weak: 0
-            }
+            soda.strong = 0;
         } else if (soda_ml >= 60 && soda_ml < 62) {
-            return {
-                type: 'pepsi',
-                relevance_degree_strong: 1,
-                relevance_degree_soft: 0,
-                relevance_degree_weak: 0
-            }
+            soda.strong = 1;
+        } else if (soda_ml >= 62 && soda_ml <= 64) {
+            soda.strong = (64 - soda_ml) / (64 - 62);
+        } else {
+            soda.strong = 0;
+        }
+    }
+}
+
+function SodaSoft(soda, soda_ml) {
+    if (soda._type == "coke") {
+        if (soda_ml < 52) {
+            soda.soft = 0;
+        } else if (soda_ml >= 52 && soda_ml < 54) {
+            soda.soft = 1 - (54 - soda_ml) / (54 - 52);
+        } else if (soda_ml >= 54 && soda_ml <= 56) {
+            soda.soft = 1;
+        } else if (soda_ml > 56 && soda_ml <= 58) {
+            soda.soft = (58 - soda_ml) / (58 - 56);
+        } else {
+            soda.soft = 0;
+        }
+    } else {
+        if (soda_ml < 62) {
+            soda.soft = 0;
         } else if (soda_ml >= 62 && soda_ml < 64) {
-            rel_deg = (64 - soda_ml) / (64 - 62);
-            if (rel_deg > 0.5) {
-                rel_deg_soft = rel_deg;
-                rel_deg_strong = 1 - rel_deg;
-            } else if (rel_deg == 0.5) {
-                rel_deg_soft = 0.5;
-                rel_deg_strong = 0.5;
-            } else {
-                rel_deg_strong = rel_deg;
-                rel_deg_soft = 1 - rel_deg;
-            }
-            return {
-                type: 'pepsi',
-                relevance_degree_strong: rel_deg_strong,
-                relevance_degree_soft: rel_deg_soft,
-                relevance_degree_weak: 0
-            }
-        } else if (soda_ml >= 64 && soda_ml < 66) {
-            return {
-                type: 'pepsi',
-                relevance_degree_soft: 1,
-                relevance_degree_weak: 0,
-                relevance_degree_strong: 0
-            }
+            soda.soft = 1 - (64 - soda_ml) / (64 - 62);
+        } else if (soda_ml >= 64 && soda_ml <= 66) {
+            soda.soft = 1;
+        } else if (soda_ml > 66 && soda_ml <= 68) {
+            soda.soft = (68 - soda_ml) / (68 - 66);
+        } else {
+            soda.soft = 0;
+        }
+    }
+}
+
+function SodaWeak(soda, soda_ml) {
+    if (soda._type == "coke") {
+        if (soda_ml < 56) {
+            soda.weak = 0;
+        } else if (soda_ml >= 56 && soda_ml < 58) {
+            soda.weak = 1 - (58 - soda_ml) / (58 - 56);
+        } else if (soda_ml >= 58 && soda_ml <= 60) {
+            soda.weak = 1;
+        } else {
+            soda.weak = 0;
+        }
+    } else {
+        if (soda_ml < 66) {
+            soda.weak = 0;
         } else if (soda_ml >= 66 && soda_ml < 68) {
-            rel_deg = (68 - soda_ml) / (68 - 66);
-            if (rel_deg > 0.5) {
-                rel_deg_weak = rel_deg;
-                rel_deg_soft = 1 - rel_deg;
-            } else if (rel_deg == 0.5) {
-                rel_deg_weak = 0.5;
-                rel_deg_soft = 0.5;
-            } else {
-                rel_deg_soft = rel_deg;
-                rel_deg_weak = 1 - rel_deg;
-            }
-            return {
-                type: 'pepsi',
-                relevance_degree_soft: rel_deg_soft,
-                relevance_degree_weak: rel_deg_weak,
-                relevance_degree_strong: 0
-            }
+            soda.weak = 1 - (68 - soda_ml) / (68 - 66);
         } else if (soda_ml >= 68 && soda_ml <= 70) {
-            return {
-                type: 'pepsi',
-                relevance_degree_weak: 1,
-                relevance_degree_strong: 0,
-                relevance_degree_soft: 0
-            }
-        } else if (soda_ml > 70) {
-            return {
-                type: 'pepsi',
-                relevance_degree_weak: 0,
-                relevance_degree_strong: 0,
-                relevance_degree_soft: 0
-            }
+            soda.weak = 1;
+        } else {
+            soda.weak = 0;
         }
     }
 }
