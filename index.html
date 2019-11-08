@@ -9,16 +9,22 @@
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/alertify.css">
+    <link rel="stylesheet" href="js/alertify.js">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css'
+        integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'>
     <script src="js/jquery-3.4.1.js"></script>
     <script src="js/fuzzy.js"></script>
 
 </head>
 
 <body>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-12">
             <div class="row justify-content-center mt-2 mb-2">
-                <h3 class="text-align-center"><span >BOTECO</span> <span class="f-small">DO</span> <br><span class="f-big font-weight-bold">GALLAS</span></h3>
+                <h3 class="text-align-center header blue-font"><i class="fas fa-cocktail"></i><span>BOTECO</span> <span
+                        class="f-small">DO</span> <br><span class="f-big font-weight-bold">GALLAS</span></h3>
             </div>
         </div>
         <div class="col-md-3 text-center">
@@ -26,11 +32,92 @@
                 Os valores devem ser entre 0 e 100ml!
             </div>
         </div>
-    </div>
-    <div class="row mb-2">
-        <div class="col-md-12">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
+    </div> -->
+    <div class="row h-100">
+        <div class="col-md-5 header-div h-100">
+            <div class="container">
+                <div class="row justify-content-center mt-5 mb-3">
+                    <h3 class="text-align-center logo-font">
+                        <i class="fas fa-cocktail"></i>
+                        <span>BOTECO</span>
+                        <span class="f-small">DO</span>
+                        <br>
+                        <span class="f-big font-weight-bold">GALLAS</span>
+                    </h3>
+                </div>
+                <div class="row justify-content-center">
+                    <p class="gray-light-font header-text">Faça você mesmo o melhor Cuba Libre que já existiu na
+                        história da humanidade humana,
+                        o Boteco do Gallas te da a oportunidade de montar o melhor drink da Via Lactea!</p>
+                </div>
+                <div class="row justify-content-start mt-5">
+                    <div class="col">
+                        <div class="row">
+                            <h4 class="white-font font-weight-bold">Quantidades: </h4>
+                        </div>
+                        <div class="row ml-4">
+                            <p class="white-font">Rum: 10ml a 30ml</p>
+                        </div>
+                        <div class="row ml-4">
+                            <p class="white-font">Gelo: 20ml</p>
+                        </div>
+                        <div class="row ml-4">
+                            <p class="white-font">Coca-Cola (50ml a 60ml) ou Pepsi-Cola (60ml a 70ml)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="container m-5">
+                <div class="row mb-4">
+                    <h3 class="gray-font font-weight-bold">Monte seu drink!</h3>
+                </div>
+                <div class="form-area mb-4">
+                    <div class="row">
+                        <label class="f-xsmall"><i class="fas fa-glass-martini-alt"></i> Refrigerante</label>
+                    </div>
+                    <div class="row ml-2">
+                        <select class="input-form" id="refri">
+                            <option value="coke">Coca Cola</option>
+                            <option value="pepsi">Pepsi</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-area mb-4">
+                    <div class="row">
+                        <label class="f-xsmall"><i class="fas fa-tint"></i> Quantidade Refrigerante (ml)</label>
+                    </div>
+                    <div class="row ml-2">
+                        <input type="number" class="input-form mt-2" onblur="checkML($(this))" id="qtd_refri"
+                            placeholder="50, 55...">
+                    </div>
+
+                </div>
+                <div class="form-area mb-4">
+                    <div class="row">
+                        <label class="f-xsmall"><i class="fas fa-wine-bottle"></i> Quantidade de Rum (ml)</label>
+                    </div>
+                    <div class="row ml-2">
+                        <input type="number" class="input-form mt-2" onblur="checkML($(this))" id="qtd_run"
+                            placeholder="20, 30...">
+                    </div>
+                </div>
+                <div class="form-area mb-4">
+                    <div class="row">
+                        <label class="f-xsmall"><i class="fas fa-dice-d6"></i> Quantidade de Gelo (ml)</label>
+                    </div>
+                    <div class="row ml-2">
+                        <input type="number" class="input-form mt-2" onblur="checkML($(this))" id="qtd_gelo"
+                            placeholder="0, 20...">
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <button class="btn btn-primary shadow" id="make_drink" onclick="calculateSoda()">Fazer Drink <i class="ml-2 animated infinite pulse fas fa-glass-cheers"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-md-6">
                     <div class="row">
                         <select class="custom-select" id="refri">
                             <option value="coke">Coca Cola</option>
@@ -69,14 +156,10 @@
 
 
 
+                </div> -->
 
-
-                </div>
-
-            </div>
-
-        </div>
     </div>
+
 
 </body>
 

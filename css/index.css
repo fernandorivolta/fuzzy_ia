@@ -1,48 +1,100 @@
 @import url('https://fonts.googleapis.com/css?family=Pathway+Gothic+One&display=swap');
 
+html,body{
+    height: 100vh;
+    width: 100vw;
+}
+
 body{
     font-family: 'Pathway Gothic One', sans-serif;
-    background-color: #E8E9E8;
+    background-color: #fff;
     overflow-x: hidden;
     
+}
+
+h3{
+    font-size: 3rem;
+}
+
+.row{
+    margin: 0px;
+}
+
+.header-text{
+    font-size: 1rem;
+    text-shadow: 0 0 15px rgba(0,0,0,.5), 0 0 10px rgba(0,0,0,.5);
+}
+
+.header-div{
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0.5) 100%), url('https://wallpaperstream.com/wallpapers/full/black-and-white/Grayscale-Drinking-Glass-Background-Wallpaper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.form-area label{
+    color: #3c408f;
+}
+
+.btn-primary{
+    border: none;
+    border-radius: 5rem;
+    background-color: #82C91E;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover{
+    border-radius: .5rem;
+    background-color: #68ad07;
+    transform: scale(1.2);
+    transition: all 0.2s;
+}
+
+.input-form{
+    width: 40rem;
+    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: #454545;
+    height: 2rem;
+}
+
+.input-form::placeholder{
+    color: #c9c9c9
+}
+
+.gray-font{
+    color: #454545;
 }
 
 .white-font{
     color:white;
 }
 
-.text-align-center{
+.gray-light-font{
+    color: #e5e5e5
+}
+
+.f-xsmall{
+    font-size: 1.3rem;
+} 
+
+.f-small{
+    font-size: 2rem;
+}  
+
+.f-big{
+    font-size: 6rem;
+}
+
+.f-medium{
+    font-size: 3.5rem;
+}
+
+.logo-font{
+    line-height: 4rem;
+    color: white;
     text-align: center;
 }
 
-.f-small{
-    font-size: 1rem;
-}
 
-.f-big{
-    font-size: 3rem;
-}
-
-.card-header{
-    background-color: #3F5CC9 ;
-}
-
-.btn-drink{
-    background-color: #3F59BE;
-    border: none;
-    border-radius: 2rem;
-    transition: all 0.3s;
-}
-
-.btn-drink:hover{
-    transform: scale(1.1);
-    transition: all 0.3s;
-}
-
-.card-cuba{
-    background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.6) 100%), url('https://i.pinimg.com/originals/9f/dd/0f/9fdd0ff9762777a3bf93961055d8e59e.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: initial;
-}
 
