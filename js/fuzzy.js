@@ -86,15 +86,36 @@ class Ice {
 }
 
 var check;
+var reason = [];
 
-function checkML(input) {
+function checkML(input, type) {
     qtd = input.val();
+    let soda_type = $('#refri').val();
     if (qtd > 100 || qtd < 0) {
         input.val("");
         alertify.set('notifier', 'position', 'top-right');
         alertify.error('Os valores devem ser entre 0ml e 100ml!');
         check = false;
     } else {
+        if (type == "soda") {
+            if (soda_type == "coke") {
+                if (qtd < 50 || qtd > 60) {
+                    reason.push("Coca-Cola");
+                }
+            } else if (soda_type == "pepsi") {
+                if (qtd < 60 || qtd > 70) {
+                    reason.push("Pepsi");
+                }
+            }
+        } else if (type == "run") {
+            if (qtd < 10 || qtd > 30) {
+                reason.push("Rum");
+            }
+        } else if (type == "ice") {
+            if (qtd != 20) {
+                reason.push("Gelo");
+            }
+        }
         check = true;
     }
 }
@@ -122,10 +143,8 @@ function calculateSoda() {
         let soft_max_val = CalculateSoft(run, ice, soda);
         let weak_max_val = CalculateWeak(run, ice, soda);
         taste = CalculateTaste(strong_max_val, soft_max_val, weak_max_val);
-        console.log("Paladar: " + taste);
         price = CalculatePrice(taste);
         alert("O Preço da bebida é " + price + " e o drink " + TranslateTaste(taste));
-        console.log("O Preço da bebida é " + price);
     }
 }
 
@@ -137,7 +156,7 @@ function TranslateTaste(taste) {
     } else if (taste == "Strong") {
         return "é Cuba Libre forte";
     } else {
-        return "não é Cuba Libre";
+        return "não é Cuba Libre devido aos seguintes ingredientes: " + reason;
     }
 }
 
