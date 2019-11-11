@@ -91,10 +91,8 @@ function checkML(input) {
     qtd = input.val();
     if (qtd > 100 || qtd < 0) {
         input.val("");
-        $('#feedback').fadeIn();
-        setTimeout(() => {
-            $('#feedback').fadeOut();
-        }, 3000);
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('Os valores devem ser entre 0ml e 100ml!');
         check = false;
     } else {
         check = true;
@@ -124,10 +122,22 @@ function calculateSoda() {
         let soft_max_val = CalculateSoft(run, ice, soda);
         let weak_max_val = CalculateWeak(run, ice, soda);
         taste = CalculateTaste(strong_max_val, soft_max_val, weak_max_val);
-        console.log(taste);
+        console.log("Paladar: " + taste);
         price = CalculatePrice(taste);
-        alert("O Preço da bebida é " + price);
+        alert("O Preço da bebida é " + price + " e o drink " + TranslateTaste(taste));
         console.log("O Preço da bebida é " + price);
+    }
+}
+
+function TranslateTaste(taste) {
+    if (taste == "Weak") {
+        return "é Cuba Libre fraco";
+    } else if (taste == "Soft") {
+        return "é Cuba Libre suave";
+    } else if (taste == "Strong") {
+        return "é Cuba Libre forte";
+    } else {
+        return "não é Cuba Libre";
     }
 }
 
