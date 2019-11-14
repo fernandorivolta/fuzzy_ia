@@ -86,7 +86,6 @@ class Ice {
 }
 
 var check;
-var reason = [];
 
 function checkML(input, type) {
     qtd = input.val();
@@ -97,30 +96,12 @@ function checkML(input, type) {
         alertify.error('Os valores devem ser entre 0ml e 100ml!');
         check = false;
     } else {
-        if (type == "soda") {
-            if (soda_type == "coke") {
-                if (qtd < 50 || qtd > 60) {
-                    reason.push("Coca-Cola");
-                }
-            } else if (soda_type == "pepsi") {
-                if (qtd < 60 || qtd > 70) {
-                    reason.push("Pepsi");
-                }
-            }
-        } else if (type == "run") {
-            if (qtd < 10 || qtd > 30) {
-                reason.push("Rum");
-            }
-        } else if (type == "ice") {
-            if (qtd != 20) {
-                reason.push("Gelo");
-            }
-        }
         check = true;
     }
 }
 
-function calculateSoda() {
+function calculate() {
+    console.clear();
     if (check) {
         let soda_ml = $('#qtd_refri').val();
         let soda_type = $('#refri').val();
@@ -139,16 +120,40 @@ function calculateSoda() {
         console.log(run);
         console.log(soda);
         console.log(ice);
+        let reason = getReason(soda_type, run_ml, soda_ml, ice_ml);
         let strong_max_val = CalculateStrong(run, ice, soda);
         let soft_max_val = CalculateSoft(run, ice, soda);
         let weak_max_val = CalculateWeak(run, ice, soda);
         taste = CalculateTaste(strong_max_val, soft_max_val, weak_max_val);
         price = CalculatePrice(taste);
-        alert("O Preço da bebida é " + price + " e o drink " + TranslateTaste(taste));
+        alert("O Preço da bebida é " + price + " e o drink " + TranslateTaste(taste, reason));
     }
 }
 
-function TranslateTaste(taste) {
+function getReason(soda_type, run_ml, soda_ml, ice_ml) {
+    let reason = [];
+    if (soda_type == "coke") {
+        if (soda_ml < 50 || soda_ml > 60) {
+            reason.push("Coca-Cola");
+        }
+    } else if (soda_type == "pepsi") {
+        if (soda_ml < 60 || soda_ml > 70) {
+            reason.push("Pepsi");
+        }
+    }
+
+    if (run_ml < 10 || run_ml > 30) {
+        reason.push("Rum");
+    }
+
+    if (ice_ml != 20) {
+        reason.push("Gelo");
+    }
+
+    return reason;
+}
+
+function TranslateTaste(taste, reason) {
     if (taste == "Weak") {
         return "é Cuba Libre fraco";
     } else if (taste == "Soft") {
