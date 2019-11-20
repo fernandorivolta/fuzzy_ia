@@ -235,7 +235,7 @@ function RunStrong(run, run_ml) {
     if (run_ml < 23) {
         run.strong = 0;
     } else if (run_ml >= 23 && run_ml < 28) {
-        run.strong = 1 - (28 - run_ml) / (28 - 23);
+        run.strong = (run_ml - 23) / (28 - 23);
     } else if (run_ml >= 28 && run_ml <= 30) {
         run.strong = 1;
     } else {
@@ -247,7 +247,7 @@ function RunSoft(run, run_ml) {
     if (run_ml < 15) {
         run.soft = 0;
     } else if (run_ml >= 15 && run_ml < 20) {
-        run.soft = 1 - (20 - run_ml) / (20 - 15);
+        run.soft = (run_ml - 15) / (20 - 15);
     } else if (run_ml >= 20 && run_ml <= 25) {
         run.soft = 1;
     } else if (run_ml > 25 && run_ml <= 27) {
@@ -298,7 +298,7 @@ function SodaSoft(soda, soda_ml) {
         if (soda_ml < 52) {
             soda.soft = 0;
         } else if (soda_ml >= 52 && soda_ml < 54) {
-            soda.soft = 1 - (54 - soda_ml) / (54 - 52);
+            soda.soft = (soda_ml - 52) / (54 - 52);
         } else if (soda_ml >= 54 && soda_ml <= 56) {
             soda.soft = 1;
         } else if (soda_ml > 56 && soda_ml <= 58) {
@@ -310,7 +310,7 @@ function SodaSoft(soda, soda_ml) {
         if (soda_ml < 62) {
             soda.soft = 0;
         } else if (soda_ml >= 62 && soda_ml < 64) {
-            soda.soft = 1 - (64 - soda_ml) / (64 - 62);
+            soda.soft = (soda_ml - 62) / (64 - 62);
         } else if (soda_ml >= 64 && soda_ml <= 66) {
             soda.soft = 1;
         } else if (soda_ml > 66 && soda_ml <= 68) {
@@ -326,7 +326,7 @@ function SodaWeak(soda, soda_ml) {
         if (soda_ml < 56) {
             soda.weak = 0;
         } else if (soda_ml >= 56 && soda_ml < 58) {
-            soda.weak = 1 - (58 - soda_ml) / (58 - 56);
+            soda.weak = (soda_ml - 56) / (58 - 56);
         } else if (soda_ml >= 58 && soda_ml <= 60) {
             soda.weak = 1;
         } else {
@@ -336,7 +336,7 @@ function SodaWeak(soda, soda_ml) {
         if (soda_ml < 66) {
             soda.weak = 0;
         } else if (soda_ml >= 66 && soda_ml < 68) {
-            soda.weak = 1 - (68 - soda_ml) / (68 - 66);
+            soda.weak = (soda_ml - 66) / (68 - 66);
         } else if (soda_ml >= 68 && soda_ml <= 70) {
             soda.weak = 1;
         } else {
